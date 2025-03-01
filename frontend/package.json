@@ -2,10 +2,10 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "frontend for alera",
-  "main": "App.js",
+  "main": "src/App.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node App.js"
+    "start": "node src/App.jsx"
   },
   "author": "",
   "license": "ISC"
