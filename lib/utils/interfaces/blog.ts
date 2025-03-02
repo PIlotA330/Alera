@@ -3,7 +3,8 @@ export interface post {
     title: string;
     userid: number;
     contents: string;
-    group: string;
+    groupId: number;
+    public: boolean;
 }
 
 export interface comment {
@@ -11,7 +12,7 @@ export interface comment {
     userid: number;
     parentPostId: number;
     contents: string;
-    group: string;
+    groupId: number;
 }
 
 export type Blog = 

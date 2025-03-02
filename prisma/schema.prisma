@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String   @id @default(cuid()) @map("_id") @db.ObjectId
+  name            String
+  username        String   @unique
+  email           String   @unique
+  password        String
+  dateLastSignedIn DateTime
+  dateSignedUp    DateTime
+  disease         String[]
+  gender          String
+  location        String
+  birthdate       DateTime
+  diagnosisDate   DateTime
+  joinedGroupIds  Int[]
+}
+
+model Disease {
+  id              String   @id @default(cuid()) @map("_id") @db.ObjectId
+  name            String   @unique
+  usersJoinedIds  Int[]
+}
+
+model Symptom {
+  id              String   @id @default(cuid()) @map("_id") @db.ObjectId
+  userid          String
+  type            String
+  severity        String
+  durationPerDay  Int?
+  energyLevel     Int?
+  impactedActivities String[]
+  triggers        String[]
+  timestamp       DateTime
+}
+
+model Blog {
+  id              String   @id @default(cuid()) @map("_id") @db.ObjectId
+  title           String
+  userid          String
+  contents        String
+  group           String
+}
+
+model Comment {
+  id              String   @id @default(cuid()) @map("_id") @db.ObjectId
+  userid          String
+  parentPostId    String
+  contents        String
+  group           String
+  public          Boolean
+}
+
