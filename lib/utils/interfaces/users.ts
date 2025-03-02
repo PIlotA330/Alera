@@ -11,6 +11,7 @@ export interface patient {
     location: string;
     birthdate: string;
     diagnosisDate: string;
+    joinedGroupIds: number[];
 }
 
 export interface doctor {
@@ -20,6 +21,7 @@ export interface doctor {
     password: string;
     specialty: string[];
     dateSignedUp: string;
+    joinedGroupIds: number[];
 }
 
 export type Users = 
