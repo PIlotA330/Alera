@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id              String   @id @default(cuid()) @map("_id") @db.ObjectId
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
   name            String
   username        String   @unique
   email           String   @unique
@@ -34,7 +34,7 @@ model User {
 }
 
 model Disease {
-  id              String   @id @default(cuid()) @map("_id") @db.ObjectId
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
   name            String
   users           User[]   @relation(fields: [userIds], references: [id])
   userIds         String[] @db.ObjectId
@@ -42,7 +42,7 @@ model Disease {
 }
 
 model Symptom {
-  id              String   @id @default(cuid()) @map("_id") @db.ObjectId
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
   user            User     @relation(fields: [userId], references: [id])
   userId          String   @db.ObjectId
   type            String
@@ -60,7 +60,7 @@ model Symptom {
 }
 
 model Blog {
-  id              String   @id @default(cuid()) @map("_id") @db.ObjectId
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
   title           String
   user            User     @relation(fields: [userid], references: [id])
   userid          String   @db.ObjectId
@@ -72,7 +72,7 @@ model Blog {
 }
 
 model Comment {
-  id              String   @id @default(cuid()) @map("_id") @db.ObjectId
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
   userid          String   @db.ObjectId
   parentblog        Blog  @relation(fields: [parentblogid], references: [id])
   parentblogid     String   @db.ObjectId
@@ -82,7 +82,7 @@ model Comment {
 }
 
 model Medication {
-  id          String  @id @default(cuid()) @map("_id") @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   user            User     @relation(fields: [userid], references: [id])
   userid          String   @db.ObjectId
   dosage        Int
