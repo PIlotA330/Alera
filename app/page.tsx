@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import { Button, TextField } from '@mui/material';
 import Link from "next/link";

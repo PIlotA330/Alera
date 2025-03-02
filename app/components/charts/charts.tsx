@@ -5,7 +5,7 @@ import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 // Fix the function parameter - it should receive props object instead of directly taking data
 export function BarCharts({ data, symp }: { data: any[] | undefined, symp: string }) {
     return (
-        <div className='h-full w-full place-items-center'>
+        <div className='h-full w-full place-items-center p-5'>
         <BarChart
         width={400}
         height={200}

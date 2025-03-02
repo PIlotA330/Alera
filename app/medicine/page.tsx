@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card } from '@mui/material';
 import SideBar from '../SideBar';
+import prisma from '@/lib/db';
 
 
 
@@ -16,8 +17,8 @@ interface Medicine {
     medication: string;
 }
 const MedicinePage = async () => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/users');
-    const medications: Medicine[] = await res.json();
+    const medications = await prisma.medication.findMany();
+
     return (
         <>
             <div className='flex flex-row h-screen w-full'>
