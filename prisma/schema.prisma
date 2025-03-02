@@ -83,6 +83,7 @@ model Comment {
 
 model Medication {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
   user            User     @relation(fields: [userid], references: [id])
   userid          String   @db.ObjectId
   dosage        Int

@@ -65,6 +65,7 @@ async function main() {
     await prisma.medication.create({
       data: {
         userid: user.id,
+        name: randomMedication.name,
         dosage: randomMedication.dosage,
         frequencyPerDay: randomMedication.frequencyPerDay,
         frequencyPerWeek: randomMedication.frequencyPerWeek
