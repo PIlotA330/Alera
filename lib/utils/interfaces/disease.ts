@@ -1,7 +1,7 @@
 export interface disease {
     id: number;
     name: string;
-    userid: number;
+    usersJoinedIds: number[];
 }
 
 export type diseases = 
