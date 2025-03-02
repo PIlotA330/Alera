@@ -2,7 +2,7 @@ import React from 'react'
 import { Card } from '@mui/material';
 import SideBar from '../SideBar';
 import prisma from '@/lib/db';
-
+import { getRandomUserId } from '../../lib/utils/getSession'
 
 
 interface Medicine {
@@ -16,8 +16,14 @@ interface Medicine {
     bDate: string;
     medication: string;
 }
+
 const MedicinePage = async () => {
-    const medications = await prisma.medication.findMany();
+    const computerUserId = await getRandomUserId();
+    const medications = await prisma.medication.findMany({
+        where : {
+            userid: computerUserId
+        },
+    });
 
     return (
         <>
@@ -27,7 +33,7 @@ const MedicinePage = async () => {
                     <h1 className='text-4xl p-5'>Medications</h1>
                     <Card>
                         <ul className='p-15'>
-                            {medications.map(medicine => <li key={medicine.id}>{medicine.name}</li>)}
+                            {medications.map(medicine => <li key={medicine.id}>{medicine.name} @ {medicine.dosage}mg, {medicine.frequencyPerWeek} per frequencyPerWeek</li>)}
                         </ul>
                     </Card>
                 </div>
