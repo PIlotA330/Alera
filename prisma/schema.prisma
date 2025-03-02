@@ -26,18 +26,25 @@ model User {
   location        String
   birthdate       DateTime
   diagnosisDate   DateTime
-  joinedGroupIds  Int[]
+  diseases        Disease[] @relation(fields: [diseaseIds], references: [id])
+  diseaseIds      String[]  @db.ObjectId
+  symptoms        Symptom[]
+  symptomIds      String[]  @db.ObjectId
+  posts           Blog[]
+  postIds         String[]  @db.ObjectId
 }
 
 model Disease {
   id              String   @id @default(cuid()) @map("_id") @db.ObjectId
-  name            String   @unique
-  usersJoinedIds  Int[]
+  users           User[]   @relation(fields: [userIds], references: [id])
+  userIds         String[] @db.ObjectId
+  usersId         String[] @db.ObjectId
 }
 
 model Symptom {
   id              String   @id @default(cuid()) @map("_id") @db.ObjectId
-  userid          String
+  users           User     @relation(fields: [userId], references: [id])
+  userId          String   @db.ObjectId
   type            String
   severity        String
   durationPerDay  Int?
@@ -50,7 +57,10 @@ model Symptom {
 model Blog {
   id              String   @id @default(cuid()) @map("_id") @db.ObjectId
   title           String
-  userid          String
+  user            User     @relation(fields: [userid], references: [id])
+  userid          String   @db.ObjectId
+  comments        Comment[]
+  commentsIds     String[]   @db.ObjectId
   contents        String
   group           String
 }
@@ -58,7 +68,8 @@ model Blog {
 model Comment {
   id              String   @id @default(cuid()) @map("_id") @db.ObjectId
   userid          String
-  parentPostId    String
+  parentblog        Blog  @relation(fields: [parentblogid], references: [id])
+  parentblogid     String   @db.ObjectId
   contents        String
   group           String
   public          Boolean
