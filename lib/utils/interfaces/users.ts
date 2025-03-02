@@ -6,6 +6,11 @@ export interface patient {
     password: string;
     dateLastSignedIn: string;
     dateSignedUp: string;
+    disease: string[];
+    gender: string;
+    location: string;
+    birthdate: string;
+    diagnosisDate: string;
 }
 
 export interface doctor {
@@ -13,7 +18,7 @@ export interface doctor {
     name: string;
     username: string;
     password: string;
-    specialty: string;
+    specialty: string[];
     dateSignedUp: string;
 }
 
