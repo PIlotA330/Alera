@@ -2,6 +2,9 @@
 import { Button, Card, CardContent, Typography } from '@mui/material'
 import React from 'react'
 import { BarCharts } from '../components/charts/charts'
+import prisma from "../../lib/db";
+
+const data = await prisma.blog.findMany();
 
 // const data = [
 //   {

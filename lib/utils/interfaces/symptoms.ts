@@ -226,4 +226,3 @@ export type Symptom =
     | SevereNausea
     | SpeechDifficulty
     | Dizziness;
-  
