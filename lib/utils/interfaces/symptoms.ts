@@ -1,6 +1,13 @@
 // Chronic Symptoms
 
+export interface EmotionalScale {
+    userid: number;
+    timestamp: string;
+    rating: number;
+}
+
 export interface Fatigue {
+    userid: number;
     severity: 'Mild' | 'Moderate' | 'Severe';
     durationPerDay: number; // in hours
     energyLevel: number; // scale from 1-10
@@ -9,17 +16,19 @@ export interface Fatigue {
     timestamp: string; // ISO date format
 }
 
-export interface ChronicPain {
+export interface GeneralPain {
+    userid: number;
     location: string; // e.g., "Lower back", "Knees"
     type: 'Sharp' | 'Dull' | 'Burning' | 'Throbbing';
     severity: number; // 0-10 scale
-    frequency: string; // e.g., "Daily", "Intermittent"
+    frequency: string;
     triggers: string[];
     painReliefMethods: string[]; // Medications, Rest, Therapy, etc.
     timestamp: string;
 }
   
 export interface MuscleWeakness {
+    userid: number;
     affectedAreas: string[]; // e.g., ["Arms", "Legs"]
     severity: 'Mild' | 'Moderate' | 'Severe';
     gripStrengthTest: number | null; // Measured in lbs or null if not tested
@@ -29,6 +38,7 @@ export interface MuscleWeakness {
 }
   
 export interface JointStiffness {
+    userid: number;
     affectedJoints: string[];
     morningStiffnessDuration: number; // in minutes
     severity: 'Mild' | 'Moderate' | 'Severe';
@@ -38,6 +48,7 @@ export interface JointStiffness {
 }
   
 export interface ChronicRespiratoryIssue {
+    userid: number;
     type: 'Wheezing' | 'Shortness of Breath' | 'Chronic Cough';
     oxygenSaturation: number; // percentage
     frequency: string; // e.g., "Daily", "During Exercise"
@@ -47,6 +58,7 @@ export interface ChronicRespiratoryIssue {
 }
   
 export interface Neuropathy {
+    userid: number;
     affectedAreas: string[];
     type: 'Burning' | 'Tingling' | 'Numbness';
     severity: number; // 0-10 scale
@@ -56,6 +68,7 @@ export interface Neuropathy {
 }
   
 export interface CognitiveImpairment {
+    userid: number;
     memoryLossSeverity: 'Mild' | 'Moderate' | 'Severe';
     attentionSpan: number; // Minutes of sustained focus
     difficultyWithTasks: string[];
@@ -65,6 +78,7 @@ export interface CognitiveImpairment {
 }
   
 export interface ChronicDigestiveIssue {
+    userid: number;
     type: 'Bloating' | 'Constipation' | 'Diarrhea' | 'Nausea';
     frequency: string; // "Daily", "After Meals", etc.
     foodTriggers: string[];
@@ -74,6 +88,7 @@ export interface ChronicDigestiveIssue {
 }
   
 export interface SkinRash {
+    userid: number;
     location: string;
     type: 'Red' | 'Itchy' | 'Blistering' | 'Scaling';
     severity: 'Mild' | 'Moderate' | 'Severe';
@@ -83,6 +98,7 @@ export interface SkinRash {
 }
   
 export interface TemperatureSensitivity {
+    userid: number;
     type: 'Cold Intolerance' | 'Heat Intolerance';
     environmentalTriggers: string[];
     skinReactions: boolean;
@@ -93,6 +109,7 @@ export interface TemperatureSensitivity {
 // Acute Symptoms
   
 export interface SevereHeadache {
+    userid: number;
     painSeverity: number; // 0-10 scale
     auraPresence: boolean;
     duration: number; // in hours
@@ -102,6 +119,7 @@ export interface SevereHeadache {
 }
   
 export interface Seizure {
+    userid: number;
     type: 'Tonic-clonic' | 'Absence' | 'Focal';
     duration: number; // in seconds
     triggers: string[];
@@ -111,6 +129,7 @@ export interface Seizure {
 }
   
 export interface VisionIssue {
+    userid: number;
     type: 'Blurry' | 'Blackout' | 'Double Vision';
     affectedEye: 'Left' | 'Right' | 'Both';
     duration: number; // in minutes
@@ -120,6 +139,7 @@ export interface VisionIssue {
 }
   
 export interface AcuteShortnessOfBreath {
+    userid: number;
     severity: 'Mild' | 'Moderate' | 'Severe';
     oxygenSaturation: number;
     triggers: string[];
@@ -129,6 +149,7 @@ export interface AcuteShortnessOfBreath {
 }
   
 export interface JointSwelling {
+    userid: number;
     affectedJoint: string;
     severity: 'Mild' | 'Moderate' | 'Severe';
     rednessAndWarmth: boolean;
@@ -138,6 +159,7 @@ export interface JointSwelling {
 }
   
 export interface SevereNausea {
+    userid: number;
     frequencyPerHour: number;
     triggers: string[];
     dehydrationSigns: boolean;
@@ -146,6 +168,7 @@ export interface SevereNausea {
 }
   
 export interface SpeechDifficulty {
+    userid: number;
     type: 'Slurred' | 'Slow' | 'Incoherent';
     duration: number; // in minutes
     otherSymptoms: string[];
@@ -154,6 +177,7 @@ export interface SpeechDifficulty {
 }
   
 export interface Dizziness {
+    userid: number;
     frequency: string; // e.g., "Daily", "Once a week"
     duration: number; // in minutes
     triggers: string[];
@@ -165,8 +189,9 @@ export interface Dizziness {
 // Export all interfaces together
   
 export type Symptom =
+    | EmotionalScale
     | Fatigue
-    | ChronicPain
+    | GeneralPain
     | MuscleWeakness
     | JointStiffness
     | ChronicRespiratoryIssue
