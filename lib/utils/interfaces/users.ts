@@ -8,20 +8,21 @@ import { Blog } from './blog'
 export interface patient {
     id: string;
     name: string;
-    email: string;
     username: string;
+    email: string;
     password: string;
-    dateLastSignedIn: string;
-    dateSignedUp: string;
+    dateLastSignedIn: Date;
+    dateSignedUp: Date;
     gender: string;
     location: string;
-    birthdate: string;
-    diagnosisDate: string;
-    diseases: Diseases[];
+    birthdate: Date;
+    diagnosisDate: Date;
     diseaseIds: string[];
-    symptoms: Symptom[];
-    posts: Blog[];
-    medications: Medication[];
+    specialty: string | null;
+    diseases?: any;
+    symptoms?: any;
+    posts?: any;
+    medications?: any;
 }
 
 export interface doctor {
