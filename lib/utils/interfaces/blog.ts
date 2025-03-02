@@ -1,20 +1,18 @@
+import { comment } from './comment';
+import { Diseases } from './disease';
+import { Users } from './users'
+
 export interface post {
-    id: number;
+    id: string;
     title: string;
-    userid: number;
+    user: Users;
+    userid: string;
+    comments: comment[];
     contents: string;
-    groupId: number;
+    disease: Diseases;
+    diseaseid: string;
     public: boolean;
 }
 
-export interface comment {
-    id: number;
-    userid: number;
-    parentPostId: number;
-    contents: string;
-    groupId: number;
-}
-
 export type Blog = 
-    | post
-    | comment;
+    | post;

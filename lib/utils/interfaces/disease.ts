@@ -1,8 +1,13 @@
+import { Blog } from "./blog";
+import { Users } from "./users";
+
 export interface disease {
-    id: number;
+    id: string;
     name: string;
-    usersJoinedIds: number[];
+    users: Users[];
+    userIds: string[];
+    blogs: Blog[];
 }
 
-export type diseases = 
+export type Diseases = 
     | disease;

@@ -1,27 +1,38 @@
 // interfaces for people
+
+import { Diseases } from './disease'
+import { Symptom } from './symptoms'
+import { Medication } from './medication'
+import { Blog } from './blog'
+
 export interface patient {
-    id: number;
-    name: string,
+    id: string;
+    name: string;
+    email: string;
     username: string;
     password: string;
     dateLastSignedIn: string;
     dateSignedUp: string;
-    disease: string[];
     gender: string;
     location: string;
     birthdate: string;
     diagnosisDate: string;
-    joinedGroupIds: number[];
+    diseases: Diseases[];
+    diseaseIds: string[];
+    symptoms: Symptom[];
+    posts: Blog[];
+    medications: Medication[];
 }
 
 export interface doctor {
-    id: number;
+    id: string;
     name: string;
     username: string;
+    email: string;
     password: string;
-    specialty: string[];
+    specialty: string; // make sure to check this is an optional field
     dateSignedUp: string;
-    joinedGroupIds: number[];
+    diseases: Diseases[];
 }
 
 export type Users = 

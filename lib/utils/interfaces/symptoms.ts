@@ -1,188 +1,206 @@
 // Chronic Symptoms
 
+import { Users } from "./users";
+
 export interface EmotionalScale {
-    userid: number;
+    id: string;
+    user: Users;
+    userId: string;
     timestamp: string;
-    rating: number;
+    energyLevel: number;
 }
 
 export interface Fatigue {
-    userid: number;
-    severity: 'Mild' | 'Moderate' | 'Severe';
+    id: string;
+    user: Users;
+    userId: string;
+    severityStr: 'Mild' | 'Moderate' | 'Severe';
     durationPerDay: number; // in hours
     energyLevel: number; // scale from 1-10
-    impactedActivities: string[]; // list of affected activities
-    triggers: string[]; // potential triggers
+    trigger: string; // potential triggers
     timestamp: string; // ISO date format
 }
 
 export interface GeneralPain {
-    userid: number;
+    id: string;
+    user: Users;
+    userId: string;
     location: string; // e.g., "Lower back", "Knees"
-    type: 'Sharp' | 'Dull' | 'Burning' | 'Throbbing';
-    severity: number; // 0-10 scale
+    severityStr: 'Sharp' | 'Dull' | 'Burning' | 'Throbbing';
+    severityNum: number; // 0-10 scale
     frequency: string;
-    triggers: string[];
-    painReliefMethods: string[]; // Medications, Rest, Therapy, etc.
+    trigger: string;
+    treatmentUsed: string; // Medications, Rest, Therapy, etc.
     timestamp: string;
 }
   
 export interface MuscleWeakness {
-    userid: number;
-    affectedAreas: string[]; // e.g., ["Arms", "Legs"]
-    severity: 'Mild' | 'Moderate' | 'Severe';
-    gripStrengthTest: number | null; // Measured in lbs or null if not tested
-    functionalImpact: string; // Description of difficulty
-    progression: string; // e.g., "Stable", "Worsening", "Improving"
+    id: string;
+    user: Users;
+    userId: string;
+    location: string; // e.g., ["Arms", "Legs"]
+    severityStr: 'Mild' | 'Moderate' | 'Severe';
     timestamp: string;
 }
   
 export interface JointStiffness {
-    userid: number;
-    affectedJoints: string[];
-    morningStiffnessDuration: number; // in minutes
-    severity: 'Mild' | 'Moderate' | 'Severe';
-    rangeOfMotion: string; // "Limited", "Normal", "Severely Restricted"
-    associatedPain: boolean;
+    id: string;
+    user: Users;
+    userId: string;
+    location: string;
+    durationPerDay: number; // in minutes
+    severityStr: 'Mild' | 'Moderate' | 'Severe';
     timestamp: string;
 }
   
 export interface ChronicRespiratoryIssue {
-    userid: number;
+    id: string;
+    user: Users;
+    userId: string;
     type: 'Wheezing' | 'Shortness of Breath' | 'Chronic Cough';
-    oxygenSaturation: number; // percentage
     frequency: string; // e.g., "Daily", "During Exercise"
-    triggers: string[];
-    medicationsUsed: string[];
+    trigger: string;
+    treatmentUsed: string;
     timestamp: string;
 }
   
 export interface Neuropathy {
-    userid: number;
-    affectedAreas: string[];
+    id: string;
+    user: Users;
+    userId: string;
+    location: string;
     type: 'Burning' | 'Tingling' | 'Numbness';
-    severity: number; // 0-10 scale
-    temperatureSensitivity: boolean;
-    dailyImpact: string;
+    severityNum: number; // 0-10 scale
+    durationPerDay: string;
     timestamp: string;
 }
   
 export interface CognitiveImpairment {
-    userid: number;
-    memoryLossSeverity: 'Mild' | 'Moderate' | 'Severe';
-    attentionSpan: number; // Minutes of sustained focus
-    difficultyWithTasks: string[];
-    correlationWithSleep: boolean;
-    triggers: string[];
+    id: string;
+    user: Users;
+    userId: string;
+    severityStr: 'Mild' | 'Moderate' | 'Severe';
+    durationPerDay: number; // Minutes of sustained focus
+    trigger: string;
     timestamp: string;
 }
   
 export interface ChronicDigestiveIssue {
-    userid: number;
+    id: string;
+    user: Users;
+    userId: string;
     type: 'Bloating' | 'Constipation' | 'Diarrhea' | 'Nausea';
     frequency: string; // "Daily", "After Meals", etc.
-    foodTriggers: string[];
-    severity: 'Mild' | 'Moderate' | 'Severe';
-    treatmentMethods: string[];
+    trigger: string;
+    severityStr: 'Mild' | 'Moderate' | 'Severe';
+    treatmentUsed: string;
     timestamp: string;
 }
   
 export interface SkinRash {
-    userid: number;
+    id: string;
+    user: Users;
+    userId: string;
     location: string;
     type: 'Red' | 'Itchy' | 'Blistering' | 'Scaling';
-    severity: 'Mild' | 'Moderate' | 'Severe';
-    triggers: string[];
+    severityStr: 'Mild' | 'Moderate' | 'Severe';
+    trigger: string;
     treatmentUsed: string[];
     timestamp: string;
 }
   
 export interface TemperatureSensitivity {
-    userid: number;
+    id: string;
+    user: Users;
+    userId: string;
     type: 'Cold Intolerance' | 'Heat Intolerance';
-    environmentalTriggers: string[];
-    skinReactions: boolean;
-    impactOnDailyLife: string;
+    trigger: string;
     timestamp: string;
 }
   
 // Acute Symptoms
   
 export interface SevereHeadache {
-    userid: number;
-    painSeverity: number; // 0-10 scale
-    auraPresence: boolean;
-    duration: number; // in hours
-    triggers: string[];
-    medicationUsed: string[];
+    id: string;
+    user: Users;
+    userId: string;
+    severityNum: number; // 0-10 scale
+    durationPerDay: number; // in hours
+    trigger: string;
+    treatmentUsed: string;
     timestamp: string;
 }
   
 export interface Seizure {
-    userid: number;
+    id: string;
+    user: Users;
+    userId: string;
     type: 'Tonic-clonic' | 'Absence' | 'Focal';
-    duration: number; // in seconds
-    triggers: string[];
-    lossOfConsciousness: boolean;
-    emergencyInterventionNeeded: boolean;
+    durationPerDay: number; // in seconds
+    frequency: number;
+    severityNum : number;
+    trigger: string;
+    treatmentUsed: string;
     timestamp: string;
 }
   
 export interface VisionIssue {
-    userid: number;
+    id: string;
+    user: Users;
+    userId: string;
     type: 'Blurry' | 'Blackout' | 'Double Vision';
-    affectedEye: 'Left' | 'Right' | 'Both';
+    location: 'Left' | 'Right' | 'Both';
     duration: number; // in minutes
-    associatedSymptoms: string[];
-    recoveryTime: number; // in minutes
     timestamp: string;
 }
   
 export interface AcuteShortnessOfBreath {
-    userid: number;
-    severity: 'Mild' | 'Moderate' | 'Severe';
-    oxygenSaturation: number;
-    triggers: string[];
-    emergencyInterventionNeeded: boolean;
-    treatmentUsed: string[];
+    id: string;
+    user: Users;
+    userId: string;
+    severityStr: 'Mild' | 'Moderate' | 'Severe';
+    trigger: string;
+    treatmentUsed: string;
     timestamp: string;
 }
   
 export interface JointSwelling {
-    userid: number;
-    affectedJoint: string;
-    severity: 'Mild' | 'Moderate' | 'Severe';
-    rednessAndWarmth: boolean;
-    activityBeforeOnset: string;
-    antiInflammatoryResponse: boolean;
+    id: string;
+    user: Users;
+    userId: string;
+    location: string;
+    severityStr: 'Mild' | 'Moderate' | 'Severe';
+    trigger: string;
     timestamp: string;
 }
   
 export interface SevereNausea {
-    userid: number;
-    frequencyPerHour: number;
-    triggers: string[];
-    dehydrationSigns: boolean;
-    hospitalizationRequired: boolean;
+    id: string;
+    user: Users;
+    userId: string;
+    frequency: number;
+    trigger: string;
+    treatmentUsed: string;
     timestamp: string;
 }
   
 export interface SpeechDifficulty {
-    userid: number;
+    id: string;
+    user: Users;
+    userId: string;
     type: 'Slurred' | 'Slow' | 'Incoherent';
-    duration: number; // in minutes
-    otherSymptoms: string[];
-    recoveryTime: number; // in minutes
+    durationPerDay: number; // in minutes
     timestamp: string;
 }
   
 export interface Dizziness {
-    userid: number;
+    id: string;
+    user: Users;
+    userId: string;
     frequency: string; // e.g., "Daily", "Once a week"
-    duration: number; // in minutes
-    triggers: string[];
-    bloodPressureBefore: number;
-    bloodPressureAfter: number;
+    durationPerDay: number; // in minutes
+    trigger: string;
+    bloodPressure: number;
     timestamp: string;
 }
   

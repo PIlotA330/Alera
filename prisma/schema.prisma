@@ -19,9 +19,8 @@ model User {
   username        String   @unique
   email           String   @unique
   password        String
-  dateLastSignedIn DateTime
-  dateSignedUp    DateTime
-  disease         String[]
+  dateLastSignedIn DateTime @default(now())
+  dateSignedUp    DateTime @default(now())
   gender          String
   location        String
   birthdate       DateTime
@@ -29,29 +28,35 @@ model User {
   diseases        Disease[] @relation(fields: [diseaseIds], references: [id])
   diseaseIds      String[]  @db.ObjectId
   symptoms        Symptom[]
-  symptomIds      String[]  @db.ObjectId
   posts           Blog[]
-  postIds         String[]  @db.ObjectId
+  medications     Medication[]
+  specialty       String?
 }
 
 model Disease {
   id              String   @id @default(cuid()) @map("_id") @db.ObjectId
+  name            String
   users           User[]   @relation(fields: [userIds], references: [id])
   userIds         String[] @db.ObjectId
-  usersId         String[] @db.ObjectId
+  blogs           Blog[]
 }
 
 model Symptom {
   id              String   @id @default(cuid()) @map("_id") @db.ObjectId
-  users           User     @relation(fields: [userId], references: [id])
+  user            User     @relation(fields: [userId], references: [id])
   userId          String   @db.ObjectId
   type            String
-  severity        String
+  severityStr     String?
+  severityNum     Int?
+  treatmentUsed   String?
+  frequency       Int?
+  duration        Int?
+  bloodPressure   Int?
   durationPerDay  Int?
   energyLevel     Int?
-  impactedActivities String[]
-  triggers        String[]
-  timestamp       DateTime
+  trigger         String?
+  location        String?
+  timestamp       DateTime   @default(now())
 }
 
 model Blog {
@@ -60,18 +65,27 @@ model Blog {
   user            User     @relation(fields: [userid], references: [id])
   userid          String   @db.ObjectId
   comments        Comment[]
-  commentsIds     String[]   @db.ObjectId
   contents        String
-  group           String
+  public          Boolean
+  disease         Disease   @relation(fields: [diseaseid], references: [id])
+  diseaseid       String     @db.ObjectId
 }
 
 model Comment {
   id              String   @id @default(cuid()) @map("_id") @db.ObjectId
-  userid          String
+  userid          String   @db.ObjectId
   parentblog        Blog  @relation(fields: [parentblogid], references: [id])
   parentblogid     String   @db.ObjectId
   contents        String
-  group           String
+  groupid           String  @db.ObjectId
   public          Boolean
 }
 
+model Medication {
+  id          String  @id @default(cuid()) @map("_id") @db.ObjectId
+  user            User     @relation(fields: [userid], references: [id])
+  userid          String   @db.ObjectId
+  dosage        Int
+  frequencyPerDay     Int
+  frequencyPerWeek    Int
+}
