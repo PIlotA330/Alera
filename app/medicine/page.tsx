@@ -32,7 +32,7 @@ const MedicinePage = async () => {
                 <div className='flex flex-col w-full place-items-center'>
                     <h1 className='text-4xl p-5'>Medications</h1>
                     <Card>
-                        <ul className='p-15'>
+                    <ul className='p-15'>
                             {medications.map(medicine => <li key={medicine.id}>{medicine.name} @ {medicine.dosage}mg, {medicine.frequencyPerWeek} per frequencyPerWeek</li>)}
                         </ul>
                     </Card>
